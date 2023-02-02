@@ -9,6 +9,7 @@ Setting up the execution environment includes:
 - Installing Node.js.
 - Installing Chrome browser for the frontend application.
 - Installing EB CLI for the backend application.
+- Setting up postgresql test database for the backend application.
 
 The deployment process:
 - The frontend application will be deployed to AWS S3 bucket.

@@ -1,0 +1,31 @@
+version: 2.1
+orbs:
+ browser-tools: circleci/browser-tools@1.2.3
+ aws-cli: circleci/aws-cli@3.1
+jobs:
+ build-test-deploy:
+  working_directory: ~/ng-project
+  docker:
+     - image: 'cimg/node:16.17-browsers'
+  steps:
+     - aws-cli/setup:
+          profile-name: default
+     - checkout
+     - browser-tools/install-chrome
+     - browser-tools/install-chromedriver
+     - run:
+        name: Install Dependencies
+        command: npm i --legacy-peer-deps
+     - run:
+        name: Build
+        command: npm run build
+     - run: 
+        name: Test
+        command: npm run test
+     - run:
+        name: Deploy
+        command: npm run deploy
+workflows:
+ build-workflow:
+  jobs:
+    - build-test-deploy
